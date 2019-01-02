@@ -37,4 +37,11 @@ package System.Soft_Links is
            Convention => C,
            External_Name => "__gnat_finalize_library_objects";
 
+   function Current_Master_Dummy return Integer is (0);
+   type Get_Integer_Call  is access function return Integer;
+   Current_Master  : Get_Integer_Call := Current_Master_Dummy'Access;
+
+   procedure Abort_Undefer_Dummy is null;
+   Abort_Undefer : No_Param_Proc := Abort_Undefer_Dummy'Access;
+
 end System.Soft_Links;

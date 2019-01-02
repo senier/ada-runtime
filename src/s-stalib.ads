@@ -44,6 +44,8 @@ package System.Standard_Library is
       Raise_Hook            : Raise_Action;
    end record;
 
+   procedure Abort_Undefer_Direct is null;
+
    procedure Adafinal is null;
 
    --  Workaround for GNATBIND 8.1 / Pro 18.1:
@@ -52,5 +54,62 @@ package System.Standard_Library is
    --  Default_Secondary_Stack_Size even if no secondary stack is used,
    --  but only adds necessary withs when secondary stack is used
    function Dummy (S : String) return String is (S);
+
+   Constraint_Error_Name : constant String := "CONSTRAINT_ERROR" & ASCII.NUL;
+   Program_Error_Name    : constant String := "PROGRAM_ERROR"    & ASCII.NUL;
+   Storage_Error_Name    : constant String := "STORAGE_ERROR"    & ASCII.NUL;
+   Tasking_Error_Name    : constant String := "TASKING_ERROR"    & ASCII.NUL;
+   Abort_Signal_Name     : constant String := "_ABORT_SIGNAL"    & ASCII.NUL;
+
+   Constraint_Error_Def : aliased Exception_Data :=
+     (Not_Handled_By_Others => False,
+      Lang                  => 'A',
+      Name_Length           => Constraint_Error_Name'Length,
+      Full_Name             => Constraint_Error_Name'Address,
+      HTable_Ptr            => null,
+      Foreign_Data          => Null_Address,
+      Raise_Hook            => null);
+
+   Program_Error_Def : aliased Exception_Data :=
+     (Not_Handled_By_Others => False,
+      Lang                  => 'A',
+      Name_Length           => Program_Error_Name'Length,
+      Full_Name             => Program_Error_Name'Address,
+      HTable_Ptr            => null,
+      Foreign_Data          => Null_Address,
+      Raise_Hook            => null);
+
+   Storage_Error_Def : aliased Exception_Data :=
+     (Not_Handled_By_Others => False,
+      Lang                  => 'A',
+      Name_Length           => Storage_Error_Name'Length,
+      Full_Name             => Storage_Error_Name'Address,
+      HTable_Ptr            => null,
+      Foreign_Data          => Null_Address,
+      Raise_Hook            => null);
+
+   Tasking_Error_Def : aliased Exception_Data :=
+     (Not_Handled_By_Others => False,
+      Lang                  => 'A',
+      Name_Length           => Tasking_Error_Name'Length,
+      Full_Name             => Tasking_Error_Name'Address,
+      HTable_Ptr            => null,
+      Foreign_Data          => Null_Address,
+      Raise_Hook            => null);
+
+   Abort_Signal_Def : aliased Exception_Data :=
+     (Not_Handled_By_Others => True,
+      Lang                  => 'A',
+      Name_Length           => Abort_Signal_Name'Length,
+      Full_Name             => Abort_Signal_Name'Address,
+      HTable_Ptr            => null,
+      Foreign_Data          => Null_Address,
+      Raise_Hook            => null);
+
+   pragma Export (C, Constraint_Error_Def, "constraint_error");
+   pragma Export (C, Program_Error_Def,    "program_error");
+   pragma Export (C, Storage_Error_Def,    "storage_error");
+   pragma Export (C, Tasking_Error_Def,    "tasking_error");
+   pragma Export (C, Abort_Signal_Def,     "_abort_signal");
 
 end System.Standard_Library;

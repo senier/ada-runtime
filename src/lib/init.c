@@ -17,3 +17,4 @@ int   __gl_leap_seconds_support          = 0;
 int   __gnat_binder_ss_count             = 0;
 int   __gnat_default_ss_pool             = 0;
 int   __gnat_default_ss_size             = 0;
+char  __gnat_text_translation_required   = 0;

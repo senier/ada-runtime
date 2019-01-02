@@ -25,7 +25,7 @@ package body Ada.Exceptions is
                                      Message : String := "") is
       pragma Unreferenced (E);
    begin
-      Platform.Log_Warning  ("Raise_Exception_Alwaysis not implemented");
+      Platform.Log_Warning  ("Raise_Exception_Always is not implemented");
       Platform.Raise_Ada_Exception (Ada_Exceptions.
                                       Undefined_Exception,
                                     "Undefined_Exception",
@@ -41,13 +41,13 @@ package body Ada.Exceptions is
    procedure Reraise_Occurrence_No_Defer (X : Exception_Occurrence) is
       pragma Unreferenced (X);
    begin
-      Platform.Log_Warning  ("Reraise_Occurrence_No_Deferis not implemented");
+      Platform.Log_Warning  ("Reraise_Occurrence_No_Defer is not implemented");
    end Reraise_Occurrence_No_Defer;
 
    procedure Save_Occurrence (Target : out Exception_Occurrence;
                               Source : Exception_Occurrence) is
    begin
-      Platform.Log_Warning  ("Save_Occurrenceis not implemented");
+      Platform.Log_Warning  ("Save_Occurrence is not implemented");
       Target := Source;
    end Save_Occurrence;
 
